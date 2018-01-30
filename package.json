@@ -1,0 +1,52 @@
+{
+  "name": "skoda-scripts",
+  "version": "0.0.11",
+  "description": "Handle node projects development tasks with no configuration",
+  "bin": {
+    "skoda-scripts": "./bin/skoda-scripts"
+  },
+  "main": "index.js",
+  "author": "thierryskoda <skodathierry@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thierryskoda/skoda-scripts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thierryskoda/skoda-scripts/issues"
+  },
+  "homepage": "https://github.com/thierryskoda/skoda-scripts#readme",
+  "scripts": {
+    "test": "jest",
+    "cover": "yarn test --cover",
+    "lint": "eslint .",
+    "format": "prettier --write '**/*.js' 'bin/*'",
+    "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+    "precommit": "lint-staged"
+  },
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "cross-spawn": "^5.1.0",
+    "husky": "^0.14.3",
+    "inquirer": "^4.0.1",
+    "is-ci": "^1.0.10",
+    "jest": "^22.0.4",
+    "lint-staged": "^6.0.0",
+    "milieu": "1.0.1",
+    "prettier": "^1.9.2",
+    "read-pkg-up": "^3.0.0"
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "prettier --write",
+      "git add"
+    ],
+    "bin/*": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "engines": {
+    "node": ">=8.3.0"
+  }
+}

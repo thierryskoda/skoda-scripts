@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+
+const spawn = require('cross-spawn')
+const chalk = require('chalk')
+
+const SIGKILL_MSG = `Exited too early. Either the process run out of memory or someone called "kill -9" on it.`
+const SIGTERM_MSG = `Exited too early. Someone called "kill", "killall" or the system is shutting down.`
+
+const isValidScript = x =>
+  x === 'init' || x === 'format' || x === 'lint' || x === 'test'
+
+const buildCommandArgs = (args, nodeArgs, scriptIndex, scriptName) => [
+  ...nodeArgs,
+  require.resolve(`../scripts/${scriptName}`),
+  ...args.slice(scriptIndex + 1),
+]
+
+const args = process.argv.slice(2)
+const scriptIndex = args.findIndex(isValidScript)
+const script = scriptIndex === -1 ? args[0] : args[scriptIndex]
+const nodeArgs = scriptIndex > 0 ? args.slice(0, scriptIndex) : []
+
+if (isValidScript(script)) {
+  const commandArgs = buildCommandArgs(args, nodeArgs, scriptIndex, script)
+
+  const result = spawn.sync('node', commandArgs, { stdio: 'inherit' })
+
+  // eslint-disable-next-line default-case
+  switch (result.signal) {
+    case 'SIGKILL':
+      console.log(SIGKILL_MSG)
+      break
+    case 'SIGTERM':
+      console.log(SIGTERM_MSG)
+      break
+  }
+
+  if (result.status > 0) {
+    console.log(`Exit Code: ${result.status}`)
+  }
+
+  process.exit(result.status)
+} else {
+  console.error(chalk`  {red Unkown script} "{bold ${script}}".`)
+  process.exit(1)
+}
