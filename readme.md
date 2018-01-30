@@ -64,7 +64,7 @@ Runs Jest. By default it runs in watch mode unless you are checking coverage (`-
 
 ## Inspiration
 
-`skoda-scripts` is our take to provide "tools without config". It was strongly inspired by [@kentcdodds](https://github.com/kentcdodds/)'s version [`kcskoda-scripts`](https://github.com/kentcdodds/kcskoda-scripts).
+`skoda-scripts` is our take to provide "tools without config". It was strongly inspired by [@kentcdodds](https://github.com/kentcdodds/)'s version [`kcd-scripts`](https://github.com/kentcdodds/kcd-scripts).
 
 - `react-scripts` from [`create-react-app`](https://github.com/facebookincubator/create-react-app).
 - [Dan Abramov - The Melting Pot of JavaScript](https://www.youtube.com/watch?v=G39lKaONAlA&feature=youtu.be).

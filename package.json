@@ -1,6 +1,6 @@
 {
   "name": "skoda-scripts",
-  "version": "0.0.11",
+  "version": "0.0.2",
   "description": "Handle node projects development tasks with no configuration",
   "bin": {
     "skoda-scripts": "./bin/skoda-scripts"
@@ -22,11 +22,13 @@
     "lint": "eslint .",
     "format": "prettier --write '**/*.js' 'bin/*'",
     "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+    "pub": "npm run format && npm run lint && npm run && node scripts/publish && npm publish",
     "precommit": "lint-staged"
   },
   "dependencies": {
     "chalk": "^2.3.0",
     "cross-spawn": "^5.1.0",
+    "eslint-config-skoda": "0.0.3",
     "husky": "^0.14.3",
     "inquirer": "^4.0.1",
     "is-ci": "^1.0.10",
